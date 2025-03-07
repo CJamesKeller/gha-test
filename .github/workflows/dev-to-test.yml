@@ -18,6 +18,6 @@ jobs:
       uses: ksivamuthu/actions-setup-gh-cli@v3
     - run: gh version
     - name: create pull request
-      run: gh pr create -B develop -H test --title 'Merge develop into test' --body 'Created by Github action'
+      run: gh pr create -B test -H develop --title 'Merge develop into test' --body 'Created by Github action'
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
