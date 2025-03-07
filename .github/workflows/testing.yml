@@ -20,8 +20,8 @@ jobs:
       uses: ksivamuthu/actions-setup-gh-cli@v3
       with:
         version: 2.64.0
-    - run: "gh version"
+    - run: gh version
     - name: create pull request
-      run: gh pr create -B base_branch -H branch_to_merge --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
+      run: gh pr create -B develop -H main --title 'Merge develop into main' --body 'Created by Github action'
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
