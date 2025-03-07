@@ -18,6 +18,8 @@ jobs:
       uses: ksivamuthu/actions-setup-gh-cli@v3
     - run: gh version
     - name: create pull request
-      run: gh pr create -B main -H test --title 'Merge test into main' --body 'Created by Github action'
+      run: |
+        pr_url="$(gh pr create -B main -H test --title 'Merge test into main' --body 'Created by Github action')"
+        gh pr merge --auto --rebase "$pr_url"
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
