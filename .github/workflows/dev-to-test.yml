@@ -1,4 +1,4 @@
-name: Dev to Test
+name: Release
 on:
   workflow_dispatch
 permissions:
@@ -19,7 +19,11 @@ jobs:
     - name: create pull request
       run: |
         pr_url="$(gh pr create -B test -H develop --title 'Merge develop into test' --body 'Created by Github action')"
-        sleep 2
+        sleep 10
+        gh pr merge --auto --merge "$pr_url"
+        sleep 10
+        pr_url="$(gh pr create -B main -H test --title 'Merge test into main' --body 'Created by Github action')"
+        sleep 10
         gh pr merge --auto --merge "$pr_url"
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
