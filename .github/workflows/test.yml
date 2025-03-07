@@ -1,0 +1,23 @@
+name: Automated PR test
+on:
+  workflow_dispatch
+permissions:
+  id-token: write
+  contents: write
+  checks: write
+  pull-requests: write
+jobs:
+  open-pr:  
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+    - uses: actions/checkout@v4
+    - name: install gh cli
+      uses: ksivamuthu/actions-setup-gh-cli@v3
+    - run: gh version
+    - name: create pull request
+      run: gh pr create -B develop -H main --title 'Merge develop into main' --body 'Created by Github action'
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
