@@ -17,6 +17,9 @@ jobs:
     - name: install gh cli
       uses: ksivamuthu/actions-setup-gh-cli@v3
     - name: create pull request
-      run: gh pr create -B test -H develop --title 'Merge develop into test' --body 'Created by Github action'
+      run: |
+        pr_url="$(gh pr create -B test -H develop --title 'Merge develop into test' --body 'Created by Github action')"
+        sleep 2
+        gh pr merge --auto --merge "$pr_url"
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
