@@ -16,7 +16,6 @@ jobs:
     - uses: actions/checkout@v4
     - name: install gh cli
       uses: ksivamuthu/actions-setup-gh-cli@v3
-    - run: gh version
     - name: create pull request
       run: gh pr create -B test -H develop --title 'Merge develop into test' --body 'Created by Github action'
       env:
